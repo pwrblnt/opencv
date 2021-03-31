@@ -65,7 +65,8 @@ def hendle_start(message):
     keyboard = telebot.types.InlineKeyboardMarkup()
     url_button1 = telebot.types.InlineKeyboardButton(text="Buy bot!", callback_data='b')
     keyboard.row(url_button1)
-    bot.send_message(message.chat.id, 'Yo, ' + message.from_user.first_name + '! Send photo whit compression and enjoy',keyboard)
+    bot.send_message(message.chat.id, 'Yo, ' + message.from_user.first_name + '! Send photo whit compression and enjoy',
+                     reply_markup=keyboard)
     answer = "menu"
     log(message, answer)
 
