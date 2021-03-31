@@ -3,6 +3,10 @@ import numpy as np
 from numba import njit
 import pygame.gfxdraw
 import cv2
+import os
+
+
+os.environ['SDL_VIDEODRIVER'] = 'dummy'
 
 
 @njit(fastmath=True)
