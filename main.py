@@ -84,7 +84,7 @@ class ArtConverter:
         pygame_image = pg.surfarray.array3d(self.surface)
         cv2_img = cv2.transpose(pygame_image)
         cv2_img = cv2.cvtColor(cv2_img, cv2.COLOR_RGB2BGR)
-        cv2.imwrite('out/00001.jpg', cv2_img)
+        cv2.imwrite('out/0000.jpg', cv2_img)
 
     def run(self):
         while True:
