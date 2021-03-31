@@ -20,7 +20,6 @@ class ArtConverter:
     def __init__(self, path='img/444.jpg', pixel_size=7, color_lvl=20):
         pg.init()
         self.path = path
-        #self.capture = cv2.VideoCapture(path)
         self.PIXEL_SIZE = pixel_size
         self.COLOR_LVL = color_lvl
         self.image = self.get_image()
@@ -78,7 +77,6 @@ class ArtConverter:
     def draw(self):
         self.surface.fill('black')
         self.draw_converted_image()
-        #self.draw_cv2_image()
 
     def save_image(self):
         pygame_image = pg.surfarray.array3d(self.surface)
