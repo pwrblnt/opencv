@@ -1,0 +1,8 @@
+numba==0.53.1
+numpy==1.19.4
+opencv-python==4.4.0.46
+pygame==2.0.0
+Flask==1.1.2
+pyTelegramBotAPI==3.7.4
+requests==2.25.0
+
