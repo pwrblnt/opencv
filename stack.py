@@ -6,7 +6,7 @@ import os
 import time
 from flask import Flask
 
-token = '654020056:AAEI3tpGD8utUGpi2uPUrRSHBWuhhW9rZzQ'
+token = '654020056:AAFD9Ip1ljF-bzrunl5C2EQdIsUdPEdpQfo'
 bot = telebot.TeleBot(token)
 
 print(bot.get_me())
@@ -129,6 +129,6 @@ def get_message():
 
 bot.remove_webhook()
 time.sleep(1)
-bot.set_webhook(url="https://sounddropbot.herokuapp.com/%s/" % token)
+bot.set_webhook(url="https://opencvstack.herokuapp.com/%s/" % token)
 
 server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 80)), debug=True)
