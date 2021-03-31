@@ -8,15 +8,13 @@ Flask = "*"
 opencv-contrib-python = "*"
 numpy = "*"
 Jinja2 = ">=2.10.1"
+numba = "0.53.1"
+opencv-python-headless = "4.2.0.32"
+pygame = "2.0.0"
+pyTelegramBotAPI = "3.7.4"
+requests = "2.25.0"
 
 [dev-packages]
 
 [requires]
 python_version = "3.6"
-numba==0.53.1
-numpy==1.19.4
-opencv-python-headless==4.2.0.32
-pygame==2.0.0
-Flask==1.1.2
-pyTelegramBotAPI==3.7.4
-requests==2.25.0
