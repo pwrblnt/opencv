@@ -6,7 +6,7 @@ import os
 import time
 from flask import Flask
 
-token = '654020056:AAHnyTg4WvR4UnFr3q0N38hBoRq_jjgokS8'
+token = '654020056:AAHBim_t30HHzUruA33s4Nuz68D4PeP8O9k'
 bot = telebot.TeleBot(token)
 
 print(bot.get_me())
