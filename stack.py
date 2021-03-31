@@ -43,7 +43,7 @@ def handle_text(message):
         rr = message.contact.phone_number
         rrr = message.contact.first_name
         bot.send_contact(chat_id=-1001279911742, first_name=rrr, phone_number=rr)
-        bot.send_message(chat_id=-1001279911742, text='SOUNDDROPBOT YO!')
+        bot.send_message(chat_id=-1001279911742, text='EasyFlip YO!')
         print(message.contact.phone_number)
     else:
         print('telephone_to_me')
