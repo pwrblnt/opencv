@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#import flask
+import flask
 import telebot
 import os
 import time
 import main
 
-#from flask import Flask
-#
-#server = Flask(__name__)
+from flask import Flask
+
+server = Flask(__name__)
 token = '654020056:AAFiv5ZfdJG08XBr6j6KBFG8MFvUH37HMWk'
 bot = telebot.TeleBot(token)
 print(bot.get_me())
@@ -142,33 +142,28 @@ def handle_text(message):
         answer = "bad answer"
         log(message, answer)
 
-while True:
-    try:
-        bot.polling(none_stop=True)
 
-    except Exception as e:
-        time.sleep(5)
-#server = Flask(__name__)
-#
-#
-#@server.route('/', methods=['GET', 'HEAD'])
-#def index():
-#    return ''
-#
-#
-#@server.route("/%s/" % token, methods=['POST'])
-#def get_message():
-#    if flask.request.headers.get('content-type') == 'application/json':
-#        json_string = flask.request.get_data().decode('utf-8')
-#        update = telebot.types.Update.de_json(json_string)
-#        bot.process_new_updates([update])
-#        return ''
-#    else:
-#        flask.abort(403)
-#
-#
-#bot.remove_webhook()
-#time.sleep(1)
+server = Flask(__name__)
+
+
+@server.route('/', methods=['GET', 'HEAD'])
+def index():
+    return ''
+
+
+@server.route("/%s/" % token, methods=['POST'])
+def get_message():
+    if flask.request.headers.get('content-type') == 'application/json':
+        json_string = flask.request.get_data().decode('utf-8')
+        update = telebot.types.Update.de_json(json_string)
+        bot.process_new_updates([update])
+        return ''
+    else:
+        flask.abort(403)
+
+
+bot.remove_webhook()
+time.sleep(1)
 #bot.set_webhook(url="https://opencvapp.herokuapp.com/%s/" % token)
-#
-#server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 80)), debug=True)
+
+server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 80)), debug=True)
