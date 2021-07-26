@@ -1,29 +1,18 @@
 import pygame as pg
 import numpy as np
-from numba import njit
 import pygame.gfxdraw
 import cv2
 import os
 
 
-os.environ['SDL_VIDEODRIVER'] = 'dummy'
-
-
-@njit(fastmath=True)
-def accelerate_conversion(image, width, height, color_coeff, step):
-    array_of_values = []
-    for x in range(0, width, step):
-        for y in range(0, height, step):
-            r, g, b = image[x, y] // color_coeff
-            if r + g + b:
-                array_of_values.append(((r, g, b), (x, y)))
-    return array_of_values
+#os.environ['SDL_VIDEODRIVER'] = 'dummy'
 
 
 class ArtConverter:
-    def __init__(self, path='img/444.jpg', pixel_size=7, color_lvl=20):
+    def __init__(self, path_in, pixel_size, color_lvl=20):
         pg.init()
-        self.path = path
+        self.path = f'img/' + path_in + '.jpg'
+        self.path_out_set = f'out/' + path_in + '.jpg'
         self.PIXEL_SIZE = pixel_size
         self.COLOR_LVL = color_lvl
         self.image = self.get_image()
@@ -86,7 +75,7 @@ class ArtConverter:
         pygame_image = pg.surfarray.array3d(self.surface)
         cv2_img = cv2.transpose(pygame_image)
         cv2_img = cv2.cvtColor(cv2_img, cv2.COLOR_RGB2BGR)
-        cv2.imwrite('out/0000.jpg', cv2_img)
+        cv2.imwrite(self.path_out_set, cv2_img)
 
     def run(self):
         while True:
@@ -95,7 +84,11 @@ class ArtConverter:
             self.save_image()
             exit()
 
+    def stop(self):
+        exit()
 
-if __name__ == '__main__':
-    app = ArtConverter()
-    app.run()
+
+#if __name__ == '__main__':
+   # app = ArtConverter()
+   # app.run()
+
