@@ -109,13 +109,13 @@ def compression_on(level, chat_id, user_id):
     if 1 <= level <= 10:
         level_up = int(5 + level)
         print(level_up, chat_id, user_id, "level_is_ok")
-        main.ArtConverter(user_id, level_up).run()
-        time.sleep(3)
+        app = main.ArtConverter(user_id, level_up)
+        app.run()
         img = open(f'out/' + user_id + '.jpg', 'rb')
         bot.send_photo(chat_id, photo=img)
     else:
         markup = telebot.types.ForceReply()
-        bot.send_message(chat_id, "send me level compression 1-10 again", reply_markup=markup)
+        bot.send_message(chat_id, "send me level compression 1-10", reply_markup=markup)
         answer = "bad answer_level"
         log(level, answer)
         time.sleep(5)
@@ -164,6 +164,6 @@ def get_message():
 
 bot.remove_webhook()
 time.sleep(1)
-#bot.set_webhook(url="https://opencvapp.herokuapp.com/%s/" % token)
+bot.set_webhook(url="https://opencvapp.herokuapp.com/%s/" % token)
 
 server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 80)), debug=True)

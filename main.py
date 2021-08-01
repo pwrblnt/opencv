@@ -4,7 +4,6 @@ import pygame.gfxdraw
 import cv2
 import os
 
-
 os.environ['SDL_VIDEODRIVER'] = 'dummy'
 
 
@@ -42,7 +41,7 @@ class ArtConverter:
         color_indices = self.image // self.COLOR_COEFF
         for x in range(0, self.WIDTH, self.PIXEL_SIZE):
             for y in range(0, self.HEIGHT, self.PIXEL_SIZE):
-                color_key = tuple(color_indices[x,y])
+                color_key = tuple(color_indices[x, y])
                 if sum(color_key):
                     color = self.PALETTE[color_key]
                     pygame.gfxdraw.box(self.surface, (x, y, self.PIXEL_SIZE, self.PIXEL_SIZE), color)
@@ -78,17 +77,12 @@ class ArtConverter:
         cv2.imwrite(self.path_out_set, cv2_img)
 
     def run(self):
-        while True:
-            self.draw()
-            pg.display.flip()
-            self.save_image()
-            exit()
-
-    def stop(self):
+        #while True:
+        self.draw()
+        pg.display.flip()
+        self.save_image()
         exit()
 
 
 #if __name__ == '__main__':
-   # app = ArtConverter()
-   # app.run()
 
