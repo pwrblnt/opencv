@@ -85,7 +85,7 @@ def compression_on(level, chat_id, user_id):
         bot.send_photo(chat_id, photo=img)
     else:
         markup = telebot.types.ForceReply()
-        bot.send_message(chat_id, "send me level compression 1-10", reply_markup=markup)
+        bot.send_message(chat_id, "send me level compression 1-15", reply_markup=markup)
         answer = "bad answer_level"
         log(level, answer)
         time.sleep(5)
