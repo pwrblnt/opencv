@@ -10,7 +10,7 @@ from flask import Flask
 
 server = Flask(__name__)
 token = os.getenv('TOKEN')
-url_heroku = os.getenv('URL')
+#url_heroku = os.getenv('URL')
 bot = telebot.TeleBot(token)
 print(bot.get_me())
 
@@ -133,6 +133,6 @@ def get_message():
 
 bot.remove_webhook()
 time.sleep(1)
-bot.set_webhook(url=url_heroku % token)
+bot.set_webhook(url="https://opencvapp.herokuapp.com/%s/" % token)
 
 server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 80)), debug=True)
