@@ -78,7 +78,6 @@ class ArtConverter:
 
     def run(self):
         print("jnjnjnjnnj")
-        #while True:
         print("1")
         ArtConverter.draw(self)
         print("2")
@@ -86,8 +85,4 @@ class ArtConverter:
         ArtConverter.save_image(self)
 
 
-
-#if __name__ == '__main__':
-    #app = ArtConverter()
-   # app.run()
 

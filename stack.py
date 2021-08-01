@@ -9,7 +9,7 @@ import main
 from flask import Flask
 
 server = Flask(__name__)
-token = '654020056:AAFiv5ZfdJG08XBr6j6KBFG8MFvUH37HMWk'
+token = os.getenv('TOKEN')
 bot = telebot.TeleBot(token)
 print(bot.get_me())
 
