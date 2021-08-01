@@ -10,6 +10,7 @@ from flask import Flask
 
 server = Flask(__name__)
 token = os.getenv('TOKEN')
+url_heroku = os.getenv('URL')
 bot = telebot.TeleBot(token)
 print(bot.get_me())
 
@@ -24,40 +25,16 @@ def log(message, answer):
     print(answer)
 
 
-@bot.message_handler(commands=['poh'])
-def hendle_start(message):
-    keyboard = telebot.types.InlineKeyboardMarkup()
-    url_button1 = telebot.types.InlineKeyboardButton(text="葉隱", url="https://telegram.me/skywallker1986")
-    url_button4 = telebot.types.InlineKeyboardButton(text="Выбери бота", callback_data='qanda')
-    keyboard.row(url_button1)
-    keyboard.row(url_button4)
-    bot.send_message(message.from_user.id, 'Use this bot for success', reply_markup=keyboard)
-
-    answer = "menu"
-    log(message, answer)
-
-
 @bot.message_handler(content_types=['contact'])
 def handle_text(message):
     if message.contact:
         rr = message.contact.phone_number
         rrr = message.contact.first_name
         bot.send_contact(chat_id=-1001279911742, first_name=rrr, phone_number=rr)
-        bot.send_message(chat_id=-1001279911742, text='EasyFlip YO!')
+        bot.send_message(chat_id=-1001279911742, text='YO!')
         print(message.contact.phone_number)
     else:
         print('telephone_to_me')
-
-
-@bot.inline_handler(lambda query: query.query == '/yo')
-def query_text(inline_query):
-    icon1 = 'https://i1.sndcdn.com/artworks-000338885529-3raizt-t500x500.jpg'
-    r = telebot.types.InlineQueryResultArticle('1', '%%%%', telebot.types.InputTextMessageContent('FLIP'),
-                                               thumb_url=icon1, thumb_width=48, thumb_height=48)
-    r1 = telebot.types.InlineQueryResultAudio(2,
-                                              audio_url='https://api.soundcloud.com/tracks/269416043/stream?limit=200&client_id=175c043157ffae2c6d5fed16c3d95a4c',
-                                              title='test123', performer='test321')
-    bot.answer_inline_query(inline_query.id, [r, r1])
 
 
 @bot.message_handler(commands=['start'])
@@ -65,7 +42,7 @@ def hendle_start(message):
     keyboard = telebot.types.InlineKeyboardMarkup()
     url_button1 = telebot.types.InlineKeyboardButton(text="Buy bot!", callback_data='b')
     keyboard.row(url_button1)
-    bot.send_message(message.chat.id, 'Yo, ' + message.from_user.first_name + '! Send photo whit compression and enjoy',
+    bot.send_message(message.chat.id, 'Yo, ' + message.from_user.first_name + '! Send photo and enjoy (:',
                      reply_markup=keyboard)
     answer = "menu"
     log(message, answer)
@@ -86,7 +63,7 @@ def callbacks(call):
 @bot.message_handler(content_types=['photo'])
 def handle_text(message):
     if message.photo:
-        markup = telebot.types.ForceReply(selective=False)
+        markup = telebot.types.ForceReply()
         raw = message.photo[-1].file_id
         file_info = bot.get_file(raw)
         downloaded_file = bot.download_file(file_info.file_path)
@@ -95,19 +72,12 @@ def handle_text(message):
         with open(f'img/' + str(message.from_user.id) + '.jpg', 'wb') as new_file:
             new_file.write(downloaded_file)
         print(message.photo[-1].file_id + '.jpg')
-        bot.send_message(message.chat.id, "send me level compression 1-10", reply_markup=markup)
-
-#        os.system('python3 main.py')
-#        img = open('out/0000.jpg', 'rb')
-#        bot.send_photo(message.chat.id, photo=img)
-#    else:
-#        print('photoPixel')
-#
+        bot.send_message(message.chat.id, "send me level compression 1-15", reply_markup=markup)
 
 
 def compression_on(level, chat_id, user_id):
-    if 1 <= level <= 10:
-        level_up = int(5 + level)
+    if 1 <= level <= 15:
+        level_up = int(2 + level)
         print(level_up, chat_id, user_id, "level_is_ok")
         app = main.ArtConverter(user_id, level_up)
         app.run()
@@ -115,7 +85,7 @@ def compression_on(level, chat_id, user_id):
         bot.send_photo(chat_id, photo=img)
     else:
         markup = telebot.types.ForceReply()
-        bot.send_message(chat_id, "send me level compression 1-10", reply_markup=markup)
+        bot.send_message(chat_id, "send me level compression 1-15", reply_markup=markup)
         answer = "bad answer_level"
         log(level, answer)
         time.sleep(5)
@@ -124,9 +94,10 @@ def compression_on(level, chat_id, user_id):
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     if message.text == "йо":
+        bot.send_message(message.chat.id, 'send me level compression 1-15')
         answer = "йо"
         log(message, answer)
-    elif message.reply_to_message.text == "send me level compression 1-10":
+    elif message.reply_to_message.text == "send me level compression 1-15":
         answer = "reply"
         print(message.text)
         level_set = int(message.text)
@@ -162,6 +133,6 @@ def get_message():
 
 bot.remove_webhook()
 time.sleep(1)
-bot.set_webhook(url="https://opencvapp.herokuapp.com/%s/" % token)
+bot.set_webhook(url=url_heroku % token)
 
 server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 80)), debug=True)
