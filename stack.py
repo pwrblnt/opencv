@@ -63,7 +63,7 @@ def callbacks(call):
 @bot.message_handler(content_types=['photo'])
 def handle_text(message):
     if message.photo:
-        markup = telebot.types.ForceReply()
+        markup = telebot.types.ForceReply(selective=False)
         raw = message.photo[-1].file_id
         file_info = bot.get_file(raw)
         downloaded_file = bot.download_file(file_info.file_path)
