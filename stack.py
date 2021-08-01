@@ -9,7 +9,7 @@ import main
 from flask import Flask
 
 server = Flask(__name__)
-token = "654020056:AAG-Iqz3U-RqcDFrKbXfK9dfESlxu8ROz2g"
+token = os.getenv('TOKEN')
 bot = telebot.TeleBot(token)
 
 print(bot.get_me())
@@ -104,7 +104,6 @@ def handle_text(message):
         chat_id_set = str(message.chat.id)
         compression_on(level_set, chat_id_set)
         log(message, answer)
-
     else:
         bot.send_message(message.chat.id, 'You send scam, you potentially lame')
         answer = "bad answer"
