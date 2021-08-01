@@ -78,19 +78,11 @@ class ArtConverter:
 
     def run(self):
         print("jnjnjnjnnj")
-        #while True:
         print("1")
         ArtConverter.draw(self)
         print("2")
         pg.display.flip()
         ArtConverter.save_image(self)
 
-        exit()
 
-
-
-
-#if __name__ == '__main__':
-    #app = ArtConverter()
-   # app.run()
 
