@@ -9,7 +9,7 @@ import main
 from flask import Flask
 
 server = Flask(__name__)
-token = os.getenv('TOKEN')
+token = "654020056:AAG-Iqz3U-RqcDFrKbXfK9dfESlxu8ROz2g"
 bot = telebot.TeleBot(token)
 
 print(bot.get_me())
@@ -72,12 +72,12 @@ def handle_text(message):
         with open(f'img/' + str(message.from_user.id) + '.jpg', 'wb') as new_file:
             new_file.write(downloaded_file)
         print(message.photo[-1].file_id + '.jpg')
-        bot.send_message(message.chat.id, "send me level compression 1-15", reply_markup=markup)
+        bot.send_message(message.chat.id, "send me level compression 1-100", reply_markup=markup)
 
 
 def compression_on(level, chat_id):
-    if 1 <= level <= 15:
-        level_up = int(2 + level)
+    if 1 <= level <= 100:
+        level_up = int(level)
         print(level_up, chat_id, "level_is_ok")
         app = main.ArtConverter(chat_id, level_up)
         app.run()
@@ -85,7 +85,7 @@ def compression_on(level, chat_id):
         bot.send_photo(chat_id, photo=img)
     else:
         markup = telebot.types.ForceReply()
-        bot.send_message(chat_id, "send me level compression 1-15", reply_markup=markup)
+        bot.send_message(chat_id, "send me level compression 1-100", reply_markup=markup)
         answer = "bad answer_level"
         log(level, answer)
         time.sleep(5)
@@ -97,7 +97,7 @@ def handle_text(message):
         bot.send_message(message.chat.id, 'q')
         answer = "йо"
         log(message, answer)
-    elif message.reply_to_message.text == "send me level compression 1-15":
+    elif message.reply_to_message.text == "send me level compression 1-100":
         answer = "reply"
         print(message.text)
         level_set = int(message.text)
