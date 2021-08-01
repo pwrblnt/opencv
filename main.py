@@ -77,12 +77,17 @@ class ArtConverter:
         cv2.imwrite(self.path_out_set, cv2_img)
 
     def run(self):
+        print("jnjnjnjnnj")
         #while True:
-        self.draw()
+        print("1")
+        ArtConverter.draw(self)
+        print("2")
         pg.display.flip()
-        self.save_image()
-        exit()
+        ArtConverter.save_image(self)
+
 
 
 #if __name__ == '__main__':
+    #app = ArtConverter()
+   # app.run()
 

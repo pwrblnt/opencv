@@ -121,8 +121,6 @@ def compression_on(level, chat_id, user_id):
         time.sleep(5)
 
 
-
-
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
     if message.text == "йо":
