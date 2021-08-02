@@ -42,7 +42,7 @@ def hendle_start(message):
     keyboard = telebot.types.InlineKeyboardMarkup()
     url_button1 = telebot.types.InlineKeyboardButton(text="Buy bot!", callback_data='b')
     keyboard.row(url_button1)
-    bot.send_message(message.chat.id, 'Yo, ' + message.from_user.first_name + '! Send photo and enjoy (:',
+    bot.send_message(message.chat.id, 'Yo, ' + message.from_user.first_name + '! Send photo or sticker and enjoy (:',
                      reply_markup=keyboard)
     answer = "menu"
     log(message, answer)
@@ -60,13 +60,29 @@ def callbacks(call):
             print('No call')
 
 
+@bot.message_handler(content_types=['sticker'])
+def handle_text(message):
+    if message.sticker:
+        markup = telebot.types.ForceReply()
+        raw = message.sticker.file_id
+        print(raw)
+        file_info = bot.get_file(message.sticker.file_id)
+        downloaded_file = bot.download_file(file_info.file_path)
+        answer = "sticker"
+        log(message, answer)
+        with open(f'img/' + str(message.from_user.id) + '.jpg', 'wb') as new_file:
+            new_file.write(downloaded_file)
+        print(message.sticker.file_id + '.jpg')
+        bot.send_message(message.chat.id, "send me level compression 1-100", reply_markup=markup)
+
+
 @bot.message_handler(content_types=['photo'])
 def handle_text(message):
     if message.photo:
-        markup = telebot.types.ForceReply()
+        markup = telebot.types.ForceReply(selective=False)
         raw = message.photo[-1].file_id
         file_info = bot.get_file(raw)
-        downloaded_file = bot.download_file(file_info.file_path)
+        downloaded_file = bot.download_file(file_info)
         answer = "send_photo"
         log(message, answer)
         with open(f'img/' + str(message.from_user.id) + '.jpg', 'wb') as new_file:
@@ -106,10 +122,12 @@ def handle_text(message):
         chat_id_set = str(message.chat.id)
         compression_on(level_set, chat_id_set)
         log(message, answer)
+
     else:
         bot.send_message(message.chat.id, 'You send scam, you potentially lame')
         answer = "bad answer"
         log(message, answer)
+
 
 
 server = Flask(__name__)
