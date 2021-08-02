@@ -83,6 +83,8 @@ def compression_on(level, chat_id):
         app.run()
         img = open(f'out/' + chat_id + '.jpg', 'rb')
         bot.send_photo(chat_id, photo=img)
+        markup = telebot.types.ForceReply()
+        bot.send_message(chat_id, "send me level compression 1-100", reply_markup=markup)
     else:
         markup = telebot.types.ForceReply()
         bot.send_message(chat_id, "send me level compression 1-100", reply_markup=markup)
