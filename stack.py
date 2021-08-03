@@ -130,7 +130,6 @@ def handle_text(message):
         log(message, answer)
 
 
-
 server = Flask(__name__)
 
 
