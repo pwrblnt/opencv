@@ -79,10 +79,11 @@ def handle_text(message):
 @bot.message_handler(content_types=['photo'])
 def handle_text(message):
     if message.photo:
-        markup = telebot.types.ForceReply(selective=False)
+        markup = telebot.types.ForceReply()
         raw = message.photo[-1].file_id
         file_info = bot.get_file(raw)
-        downloaded_file = bot.download_file(file_info)
+        print(raw)
+        downloaded_file = bot.download_file(file_info.file_path)
         answer = "send_photo"
         log(message, answer)
         with open(f'img/' + str(message.from_user.id) + '.jpg', 'wb') as new_file:
