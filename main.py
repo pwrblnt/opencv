@@ -19,7 +19,6 @@ class ArtConverter:
         self.surface = pg.display.set_mode(self.RES)
         self.clock = pg.time.Clock()
         self.PALETTE, self.COLOR_COEFF = self.create_palette()
-
         self.rec_fps = 25
         self.record = False
 
