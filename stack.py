@@ -60,17 +60,6 @@ def callbacks(call):
             print('No call')
 
 
-@bot.inline_handler(lambda query: query.query == 'yo')
-def query_text(inline_query):
-    icon1 = 'https://i1.sndcdn.com/artworks-000338885529-3raizt-t500x500.jpg'
-    r = telebot.types.InlineQueryResultArticle('1', '%%%%')
-    r1 = telebot.types.InlineQueryResultAudio(2,
-                                              audio_url='https://api.soundcloud.com/tracks/269416043/stream?limit=200&client_id=175c043157ffae2c6d5fed16c3d95a4c',
-                                              title='test123', performer='test321')
-    bot.answer_inline_query(inline_query.id, [r, r1])
-
-
-
 @bot.message_handler(content_types=['sticker'])
 def handle_text(message):
     if message.sticker:
